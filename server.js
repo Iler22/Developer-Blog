@@ -1,38 +1,51 @@
 const path = require('path');
 const express = require('express');
-
-// const session = require('express-session');
+const session = require('express-session');
 const exphbs = require('express-handlebars');
+const connectSessionSequelize = require('connect-session-sequelize');
 
-const routes = require('./controllers');
-const sequelize = require('./config/connection');
-// const helpers = require('./utils/helpers');
+const routes = require('./routes');
+const connection = require('./config/connection');
 
-const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Set up sessions
-// const sess = {
-//   secret: process.env.SESSION_SECRET,
-//   resave: false,
-//   saveUninitialized: false,
-// };
+const SequelizeStore = connectSessionSequelize(session.Store);
 
+const sessionOptions = {
+  secret: 'Super secret secret',
+  cookie: {
+    maxAge: 3600 * 1000,
+  },
+  resave: false,
+  saveUninitialized: false,
+  store: new SequelizeStore({
+    db: connection,
+  }),
+};
+
+const app = express();
 const hbs = exphbs.create({});
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
+app.use(session(sessionOptions));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(routes);
 
-sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () =>
-    console.log(
-      `\nServer running on port ${PORT}. Visit http//:localhost:${PORT} and create an account!`
-    )
-  );
-});
+const init = async () => {
+  try {
+    await connection.sync({ force: false });
+    console.log('[Info]: DB connection successful');
+
+    app.listen(PORT, () => console.log(`Navigate to http//:localhost:${PORT}`));
+  } catch (error) {
+    console.log(`[ERROR]: DB connection failed | ${error.message}`);
+
+    process.exit(0);
+  }
+};
+
+init();

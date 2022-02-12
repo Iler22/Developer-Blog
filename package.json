@@ -10,7 +10,9 @@
     "sequelize": "^6.15.0"
   },
   "scripts": {
-    "start": "node server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "seed": "node seeds/index.js"
   },
   "name": "developer-blog",
   "description": "",
@@ -26,5 +28,8 @@
   "bugs": {
     "url": "https://github.com/Iler22/Developer-Blog/issues"
   },
-  "homepage": "https://github.com/Iler22/Developer-Blog#readme"
+  "homepage": "https://github.com/Iler22/Developer-Blog#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
 }
