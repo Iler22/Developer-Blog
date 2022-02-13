@@ -10,7 +10,11 @@ const seedAll = async () => {
 
     console.log('DB sync successful');
 
-    await User.bulkCreate(users);
+    const userPromises = users.map((user) => User.create(user));
+
+    console.log(userPromises);
+
+    await Promise.all(userPromises);
 
     console.log('Users seeded successfully');
 
