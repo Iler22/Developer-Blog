@@ -1,9 +1,8 @@
+{{> privateNavbar}}
 <ul>
-
   {{#each blogs}}
     <li>
-      <div>{{this.title}}</div>
-      -
+      <a href='/blogs/{{this.id}}'>{{this.title}}</a>
       <div>{{this.username}}</div>
     </li>
   {{/each}}
