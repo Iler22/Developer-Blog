@@ -1,3 +1,5 @@
+const { Blog, User } = require('../../models');
+
 const renderSignUpPage = (req, res) => {
   if (!req.session.loggedIn) {
     return res.render('signUp');
@@ -14,9 +16,20 @@ const renderLoginPage = (req, res) => {
   return res.redirect('/');
 };
 
-const renderHomePage = (req, res) => {
+const renderHomePage = async (req, res) => {
   const { loggedIn } = req.session;
-  return res.render('home', { loggedIn });
+  const blogsFromDB = await Blog.findAll({
+    include: [
+      {
+        model: User,
+        attributes: ['username'],
+      },
+    ],
+  });
+
+  const blogs = blogsFromDB.map((blogs) => blogs.get({ plain: true }));
+  console.log(blogs);
+  return res.render('home', { loggedIn, blogs });
 };
 
 module.exports = {
