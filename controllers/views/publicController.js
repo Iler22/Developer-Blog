@@ -1,13 +1,22 @@
 const renderSignUpPage = (req, res) => {
-  return res.render('signUp');
+  if (!req.session.loggedIn) {
+    return res.render('signUp');
+  }
+
+  return res.redirect('/');
 };
 
 const renderLoginPage = (req, res) => {
-  return res.render('login');
+  if (!req.session.loggedIn) {
+    return res.render('login');
+  }
+
+  return res.redirect('/');
 };
 
 const renderHomePage = (req, res) => {
-  return res.render('home');
+  const { loggedIn } = req.session;
+  return res.render('home', { loggedIn });
 };
 
 module.exports = {
