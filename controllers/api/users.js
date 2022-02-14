@@ -1,4 +1,4 @@
-const { getPayloadWithValidFieldsOnly } = require('../../helpers');
+const { getPayloadWithValidFieldsOnly } = require('../../utils');
 const { User } = require('../../models');
 
 const signUp = async (req, res) => {
