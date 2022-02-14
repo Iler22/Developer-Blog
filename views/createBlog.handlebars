@@ -1,9 +1,18 @@
 {{> privateNavbar}}
-<ul>
-  {{#each blogs}}
-    <li>
-      <a href='/blogs/{{this.id}}'>{{this.title}}</a>
-      <div>{{this.username}}</div>
-    </li>
-  {{/each}}
-</ul>
+<div class='container my-4 p-4 border'>
+  <h1>Create a Blog</h1>
+  <hr />
+  <form id='create-blog-form'>
+    <div class='mb-3'>
+      <label for='title' class='form-label'>Title</label>
+      <input type='text' class='form-control' id='title' />
+    </div>
+    <div class='mb-3'>
+      <label for='contents' class='form-label'>Contents</label>
+      <input type='text' class='form-control' id='contents' />
+    </div>
+    <div class="d-grid gap-2 mb-3">
+  <button class="btn btn-primary" type="submit">Create</button>
+</div>
+</form>
+</div>
