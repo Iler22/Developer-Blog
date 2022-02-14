@@ -1,6 +1,30 @@
-const createBlog = (req, res) => {
-  res.send('createBlog');
+const { Blog } = require('../../models');
+const { getPayloadWithValidFieldsOnly } = require('../../utils');
+
+const createBlog = async (req, res) => {
+  try {
+    const payload = getPayloadWithValidFieldsOnly(
+      ['title', 'contents'],
+      req.body
+    );
+
+    if (Object.keys(payload).length !== 2) {
+      console.log(`[ERROR]: Failed to create blog | Invalid fields`);
+      return res.status(400).json({ error: 'Failed to create blog' });
+    }
+
+    await Blog.create({
+      ...payload,
+      user_id: req.session.user.id,
+    });
+
+    return res.json({ message: 'Successfully created blog' });
+  } catch (error) {
+    console.log(`[ERROR]: Failed to create blog | ${error.message}`);
+    return res.status(500).json({ error: 'Failed to create blog' });
+  }
 };
+
 const updateBlog = (req, res) => {
   res.send('updateBlog');
 };
