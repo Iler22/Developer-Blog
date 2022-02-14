@@ -27,8 +27,8 @@ const renderHomePage = async (req, res) => {
     ],
   });
 
-  const blogs = blogsFromDB.map((blogs) => blogs.get({ plain: true }));
-  console.log(blogs);
+  const blogs = blogsFromDB.map((blog) => blog.get({ plain: true }));
+
   return res.render('home', { loggedIn, blogs });
 };
 
