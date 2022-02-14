@@ -11,6 +11,9 @@ const PORT = process.env.PORT || 3001;
 
 const SequelizeStore = connectSessionSequelize(session.Store);
 
+const app = express();
+const hbs = exphbs.create({});
+
 const sessionOptions = {
   secret: 'Super secret secret',
   cookie: {
@@ -23,14 +26,11 @@ const sessionOptions = {
   }),
 };
 
-const app = express();
-const hbs = exphbs.create({});
-
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 app.use(session(sessionOptions));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(routes);
