@@ -1,6 +1,13 @@
 {{#if loggedIn}}
-{{> privateNavbar}}
+    {{> privateNavbar}}
 {{else}}
-{{> publicNavbar}}
+    {{> publicNavbar}}
 {{/if}}
-<h1>Home</h1>
+<main>
+  {{> banner}}
+  <div class="d-flex flex-column bd-highlight mb-3 justify-content-center">
+      {{#each blogs as | blog |}}
+        {{> blogCard}}
+      {{/each}}  
+  </div>
+</main>
