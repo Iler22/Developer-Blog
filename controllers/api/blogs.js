@@ -19,7 +19,8 @@ const addComment = async (req, res) => {
     await Comment.create({
       ...payload,
       user_id: req.session.user.id,
-      username: req.session.user.username,
+      post_id: req.body.post_id,
+      contents: req.body.contents,
     });
 
     return res.json({ message: 'Successfully added comment' });
@@ -51,7 +52,6 @@ const createBlog = async (req, res) => {
 
     return res.json({ message: 'Successfully added comment' });
   } catch (error) {
-    console.log(`[ERROR]: Failed to create blog | ${error.message}`);
     return res.status(500).json({ error: 'Failed to create blog' });
   }
 };
