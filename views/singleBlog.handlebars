@@ -30,6 +30,12 @@
   <div class="my-2 text-center mt-5">
    <button class="btn btn-primary" type="button" id='comment-btn'>Submit</button>
   </div>
- 
+  {{#if comment}}
+   <div class="d-flex flex-column bd-highlight mb-3 justify-content-center">
+      {{#each comment}}
+        {{> commentCard}}
+      {{/each}}  
+  </div>
+  {{/if}}
 </main>
 {{> footer}}
