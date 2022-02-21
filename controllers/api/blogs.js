@@ -19,7 +19,7 @@ const addComment = async (req, res) => {
     await Comment.create({
       ...payload,
       user_id: req.session.user.id,
-      post_id: req.body.post_id,
+      blog_id: req.body.blog_id,
       contents: req.body.contents,
     });
 

@@ -21,6 +21,14 @@ const schema = {
       model: 'user',
       key: 'id',
     },
+    blog_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'user_id',
+        key: 'id',
+      },
+    },
   },
 };
 
