@@ -5,7 +5,7 @@ const exphbs = require('express-handlebars');
 const connectSessionSequelize = require('connect-session-sequelize');
 
 const routes = require('./routes');
-const connection = require('./config/connection');
+const connection = require('./config/connection.js');
 
 const PORT = process.env.PORT || 3001;
 

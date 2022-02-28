@@ -1,0 +1,69 @@
+.jumbotron {
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-color: #e9ecef;
+  border-radius: 0.3rem;
+}
+
+/* :root {
+  --dark: #13293d;
+  --light: #fff;
+  --navlink-color: #b9c6ae;
+  --border-radius: 0.3rem;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3%;
+  background-color: var(--dark);
+  color: var(--light);
+}
+
+h1 {
+  font-size: 200%;
+}
+
+h2 {
+  margin: 2% 0;
+  font-size: 250%;
+}
+
+a[href*='.css']::after {
+  content: '📝';
+  display: inline-block;
+  margin-left: 3px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  min-width: 250px;
+}
+
+nav a {
+  background-color: unset;
+  color: var(--navlink-color);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: var(--light);
+}
+
+main {
+  max-width: 96%;
+  margin: 2% auto;
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    flex-direction: column;
+  }
+
+  main {
+    max-width: 1200px;
+  }
+} */

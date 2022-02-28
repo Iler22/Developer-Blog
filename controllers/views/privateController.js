@@ -16,6 +16,8 @@ const renderSingleBlogPage = async (req, res) => {
     ],
   });
 
+  console.log('Here is your blogFromDB:', blogFromDB);
+
   const blog = blogFromDB.get({ plain: true });
   const isMyBlog = loggedIn && user.id === blog.user.id;
 
@@ -25,24 +27,24 @@ const renderSingleBlogPage = async (req, res) => {
   return res.render('singleBlog', { loggedIn, blog, isMyBlog });
 };
 
-const renderUserComment = async (req, res) => {
-  const { loggedIn, user } = req.session;
-  const { id } = req.params;
-  const commentFromDB = await Comment.findByPk(id, {
-    include: [
-      {
-        model: User,
-        attributes: ['username', 'id'],
-      },
-    ],
-  });
+// const renderUserComment = async (req, res) => {
+//   const { loggedIn, user } = req.session;
+//   const { id } = req.params;
+//   const commentFromDB = await Comment.findByPk(id, {
+//     include: [
+//       {
+//         model: User,
+//         attributes: ['username', 'id'],
+//       },
+//     ],
+//   });
 
-  const comment = commentFromDB.get({ plain: true });
+//   const comment = commentFromDB.get({ plain: true });
 
-  const isMyComment = loggedIn && user.id === comment.user.id;
+//   const isMyComment = loggedIn && user.id === comment.user.id;
 
-  return res.render('singleBlog', { loggedIn, comment, isMyComment });
-};
+//   return res.render('singleBlog', { loggedIn, comment, isMyComment });
+// };
 
 const renderDashboardPage = async (req, res) => {
   const { loggedIn, user } = req.session;
@@ -72,5 +74,5 @@ module.exports = {
   renderSingleBlogPage,
   renderDashboardPage,
   renderCreateBlogPage,
-  renderUserComment,
+  // renderUserComment,
 };

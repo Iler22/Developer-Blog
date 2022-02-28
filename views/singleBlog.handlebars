@@ -23,14 +23,14 @@
 </div>
 
   <div class="mt-5 mx-5">
-    <label for="comment" class="form-label">Comment</label>
+    <label for="contents" class="form-label">Comment</label>
     <textarea class="form-control" id="contents" rows="3"></textarea>
   </div>
 
   <div class="my-2 text-center mt-5">
    <button class="btn btn-primary" type="button" id='comment-btn'>Submit</button>
   </div>
-  {{#if comment}}
+  {{#if loggedIn}}
    <div class="d-flex flex-column bd-highlight mb-3 justify-content-center">
       {{#each comment}}
         {{> commentCard}}

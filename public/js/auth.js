@@ -5,7 +5,6 @@ const logoutBtn = $('#logout-btn');
 const handleSignUp = async (event) => {
   event.preventDefault();
 
-  console.log('submitted');
   const username = $('#username').val();
   const password = $('#password').val();
 

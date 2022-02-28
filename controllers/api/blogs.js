@@ -8,7 +8,7 @@ const { getPayloadWithValidFieldsOnly } = require('../../utils');
 
 const addComment = async (req, res) => {
   try {
-    const payload = getPayloadWithValidFieldsOnly(['contents'], req.body);
+    const payload = getPayloadWithValidFieldsOnly('contents', req.body);
 
     console.log(req.body);
     if (Object.keys(payload).length !== 1) {
@@ -18,15 +18,19 @@ const addComment = async (req, res) => {
 
     await Comment.create({
       ...payload,
-      user_id: req.session.user.id,
-      blog_id: req.body.blog_id,
-      contents: req.body.contents,
+      dataValues: {
+        comment: {
+          user_id: req.session.user.id,
+          blog_id: req.body.blog_id,
+          contents: req.body.contents,
+        },
+      },
     });
 
     return res.json({ message: 'Successfully added comment' });
   } catch (error) {
-    console.log(`[ERROR]: Failed to added comment | ${error.message}`);
-    return res.status(500).json({ error: 'Failed to added comment' });
+    console.log(`[ERROR]: Failed to add comment | ${error.message}`);
+    return res.status(500).json({ error: 'Failed to add comment' });
   }
 };
 
@@ -87,59 +91,5 @@ const deleteBlog = async (req, res) => {
     return res.status(500).json({ success: false, error: error.message });
   }
 };
-
-// const { Blog } = require('../../models');
-
-// get all blogs
-// router.get('/', async (req, res) => {
-//   try {
-//     const blogs = (await Blog.findAll()).map((blog) =>
-//       blog.get({ plain: true })
-//     );
-//     res.render('blogs', { blogs });
-//   } catch (err) {
-//     res.sendStatus(500).send(err);
-//   }
-// });
-
-// // get single blog
-// router.get('/:id', async (req, res) => {
-//   try {
-//     const blog = (await Blog.findByPk(req.params.id)).get({ plain: true });
-//     res.render('single-blog', { blog });
-//   } catch (err) {
-//     res.sendStatus(500).send(err);
-//   }
-// });
-
-// // add a blog
-// router.post('/', async (req, res) => {
-//   try {
-//     const createBlog = await Blog.create(req.body);
-//     res.json(createBlog);
-//   } catch (err) {
-//     res.sendStatus(500).send(err);
-//   }
-// });
-
-// // update a blog
-// router.put('/:id', async (req, res) => {
-//   try {
-//     const updateBlog = await Blog.update(req.body);
-//     res.json(updateBlog);
-//   } catch (err) {
-//     res.sendStatus(500).send(err);
-//   }
-// });
-
-// // delete a blog
-// router.delete('/:id', async (req, res) => {
-//   try {
-//     const deleteBlog = await Blog.destroy(req.body);
-//     res.json(deleteBlog);
-//   } catch (err) {
-//     res.sendStatus(500).send(err);
-//   }
-// });
 
 module.exports = { addComment, createBlog, updateBlog, deleteBlog };

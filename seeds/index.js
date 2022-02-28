@@ -1,8 +1,8 @@
 const users = require('./users');
 const blogs = require('./blogs');
+const connection = require('../config/connection');
 const User = require('../models/User');
 const Blog = require('../models/Blog');
-const connection = require('../config/connection');
 
 const seedAll = async () => {
   try {
@@ -11,8 +11,6 @@ const seedAll = async () => {
     console.log('DB sync successful');
 
     const userPromises = users.map((user) => User.create(user));
-
-    console.log(userPromises);
 
     await Promise.all(userPromises);
 

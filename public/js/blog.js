@@ -36,7 +36,7 @@ const handleAddComment = async (event) => {
     contents,
   });
 
-  const response = await fetch('/api/blogs/:id', {
+  const response = await fetch('/api/comments', {
     method: 'POST',
     body: payload,
     headers: {
@@ -45,7 +45,7 @@ const handleAddComment = async (event) => {
   });
 
   if (response.ok) {
-    window.location.replace('/');
+    window.location.reload();
   } else {
     alert('Failed to add comment');
   }

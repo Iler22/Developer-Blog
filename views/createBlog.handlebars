@@ -1,5 +1,5 @@
 {{> privateNavbar}}
-<div class='container my-4 p-4 border'>
+<div class='container mt-5 my-4 p-4 border'>
   <h1>Create a Blog</h1>
   <hr />
   <form id='create-blog-form'>
@@ -7,12 +7,13 @@
       <label for='title' class='form-label'>Title</label>
       <input type='text' class='form-control' id='title' />
     </div>
-    <div class='mb-3'>
-      <label for='contents' class='form-label'>Contents</label>
-      <input type='text' class='form-control' id='contents' />
-    </div>
+    <div class="mb-3">
+  <label for="contents" class="form-label">Contents</label>
+  <textarea class="form-control" id="contents" rows="3"></textarea>
+</div>
     <div class="d-grid gap-2 mb-3">
   <button class="btn btn-primary" type="submit">Create</button>
 </div>
 </form>
 </div>
+
