@@ -5,6 +5,7 @@ const DB_NAME = process.env.DB_NAME;
 const DB_USER = process.env.DB_USER;
 const DB_PASSWORD = process.env.DB_PASSWORD;
 const DB_HOST = process.env.DB_HOST;
+const JAWSDB_URL = process.env.JAWSDB_URL;
 
 const options = {
   host: DB_HOST,
@@ -13,7 +14,7 @@ const options = {
   logging: false,
 };
 
-const connection = process.env.JAWSDB_URL
+const connection = JAWSDB_URL
   ? new Sequelize(JAWSDB_URL)
   : new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, options);
 
