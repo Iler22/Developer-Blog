@@ -20,7 +20,7 @@ const addComment = async (req, res) => {
       ...payload,
       dataValues: {
         comment: {
-          user_id: req.session.user_id,
+          user_id: req.session.user.id,
           blog_id: req.body.blog_id,
           contents: req.body.contents,
         },
@@ -50,7 +50,7 @@ const createBlog = async (req, res) => {
 
     await Blog.create({
       ...payload,
-      user_id: req.session.user_id,
+      user_id: req.session.user.id,
       username: req.session.user.username,
     });
 
